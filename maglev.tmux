@@ -110,9 +110,9 @@ apply_theme() {
     fi
     tmux set -g status-left-length 32 \; set -g status-left "$status_left"
 
-    window_status_fg=colour8 # gray
+    window_status_fg=colour245 # gray
     window_status_bg=colour0 # dark gray
-    window_status_format="#I #W"
+    window_status_format="$left_separator #I #W"
     tmux setw -g window-status-style fg=$window_status_fg,bg=$window_status_bg \; setw -g window-status-format "$window_status_format"
 
     window_status_current_fg=colour16 # black
