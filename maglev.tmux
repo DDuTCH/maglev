@@ -8,6 +8,10 @@ SHOW_CPU=false
 if [[ $PLUGINS == *"tmux-cpu"* ]]; then
     SHOW_CPU=true
 fi
+SHOW_MEM=false
+if [[ $PLUGINS == *"tmux-plugin-sysstat"* ]]; then
+    SHOW_MEM=true
+fi
 SHOW_BATTERY=false
 if [[ $PLUGINS == *"tmux-battery"* ]]; then
     SHOW_BATTERY=true
@@ -161,7 +165,11 @@ apply_theme() {
     fi
 
     if [ "$SHOW_CPU" = true ]; then
-        status_right="$status_right CPU #{cpu_percentage} "
+        status_right="$status_right CPU #{cpu_percentage} $right_separator"
+    fi
+    
+    if [ "$SHOW_MEM" = true ]; then
+        status_right="$status_right MEM #{sysstat_mem} "
     fi
 
     tmux set -g status-right-length 64 \; set -g status-right "$status_right"
